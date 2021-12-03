@@ -29,12 +29,25 @@ public class Statistics {
     }
 
     public Map<String, Double> getAverageCurrencyValue(Map<String, List<Double>> value) {
-        Map<String, Double> currencyAverage = new HashMap<>();
+        Map<String, Double> currencyAverageMap = new HashMap<>();
         for (String key : value.keySet()) {
-            currencyAverage.put(key, calculateAverage(value.get(key)));
+            currencyAverageMap.put(key, calculateAverage(value.get(key)));
         }
-        return currencyAverage;
+        return currencyAverageMap;
     }
+    public Map<String, Double> getStandardDeviationCurrencyValue(Map<String, List<Double>> value) {
+        Map<String, Double> currencyStandardDeviationMap = new HashMap<>();
 
+        for (String key : value.keySet()) {
+            double standardDeviation = 0.0;
+            int listSize = value.get(key).size();
+            double mean = calculateAverage(value.get(key));
+            for(int i=0;i<listSize;i++){
+                standardDeviation += Math.pow(value.get(key).get(i) - mean, 2);
+            }
+            currencyStandardDeviationMap.put(key, Math.sqrt(standardDeviation/listSize));
+        }
+        return currencyStandardDeviationMap;
+    }
 
 }

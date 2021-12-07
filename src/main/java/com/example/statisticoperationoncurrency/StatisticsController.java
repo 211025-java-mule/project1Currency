@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-import static com.example.statisticoperationoncurrency.Statistics.averageCurrencyValueBasedOnEUR;
+import static com.example.statisticoperationoncurrency.StatisticalMethods.averageCurrencyValueBasedOnEUR;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -23,7 +23,7 @@ public class StatisticsController {
 
     @PostMapping(value = "/getAverageCalculation", consumes = APPLICATION_JSON_VALUE)
     public StatisticResult calculate(@RequestBody CurrencyData currencyData) throws JsonProcessingException {
-        Statistics statistics = new Statistics();
+        StatisticalMethods statistics = new StatisticalMethods();
         StatisticResult stastisticResult = new StatisticResult();
 
         Map<String, Double> averageRate = statistics
@@ -36,7 +36,7 @@ public class StatisticsController {
 
     @PostMapping(value = "/getStandardDeviationCalculation", consumes = APPLICATION_JSON_VALUE)
     public StatisticResult calculateStandardDeviation(@RequestBody CurrencyData currencyData) throws JsonProcessingException {
-        Statistics statistics = new Statistics();
+        StatisticalMethods statistics = new StatisticalMethods();
         StatisticResult stastisticResult = new StatisticResult();
 
         Map<String, Double> standardDeviationOfRate = statistics
